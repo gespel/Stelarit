@@ -2,29 +2,22 @@
 #include <iostream>
 #include <string.h>
 #include "player.h"
-
+#include <fstream>
 
 
 using namespace std;
 
 class Map {
 	public:
+		Map(string mapName);
 		void moveNorth(Player *p);
 		void moveSouth(Player *p);
 		void moveWest(Player *p);
 		void moveEast(Player *p);
-		void printMap(string map[8][8],Player *p);
-		string stelarit[8][8] = {
-			{"-","-","-","-","-","-","~","-"},
-			{"-","-","|","|","-","~","~","-"},
-			{"-","|","|","|","|","~","~","~"},
-			{"-","-","|","|","-","~","~","-"},
-			{"-","|","|","|","|","-","~","-"},
-			{"-","-","|","|","|","-","-","-"},
-			{"-","-","-","|","-","-","-","-"},
-			{"-","-","-","-","-","-","-","-"},
-		};
+		void printMap(Player *p);
+		bool checkCurrentTile(Player *p, int pX, int pY);
+		string map[32][16];
 	private:
-		void checkCurrentTile(Player *p);
+		//void checkCurrentTile(Player *p);
 		string currentPlayerTile;	
 };

@@ -2,6 +2,7 @@
 
 Player::Player() {
 	hp = 10;
+	maxHp = 10;
 	stamina = 20;
 	level = 1;
 	exp = 0;
@@ -15,9 +16,14 @@ Player::Player() {
 	posY = 1;
 }
 
-
+void Player::restoreHealth() {
+	hp = maxHp;
+}
 int Player::getHealth() {
 	return hp;
+}
+int Player::getMaxHealth() {
+	return maxHp;
 }
 int Player::getLevel() {
 	return level;

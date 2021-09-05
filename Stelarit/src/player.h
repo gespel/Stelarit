@@ -16,6 +16,8 @@ class Player {
 		int getMoney();
 		int getHealth();
 
+		void restoreHealth();
+		int getMaxHealth();
 		void setPlayerName(string input);
 		void addExp(int amount);
 		void addMoney(int amount);
@@ -35,6 +37,7 @@ class Player {
 		int memory;
 		int money;
 		int hp;
+		int maxHp;
 		int stamina;
 		void updateLevel();
 		bool isBroke(int cost);

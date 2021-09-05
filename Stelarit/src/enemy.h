@@ -11,8 +11,12 @@ class Enemy {
 		bool isAlive();
 		int getHealth();
 		string getName();
+		int getKillExp();
+		int getLevel();
 	private:
 		int hp;
+		int level;
 		int normalDmg;
 		string name;
+		int killExp;
 };

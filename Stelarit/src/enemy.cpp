@@ -5,6 +5,8 @@ Enemy::Enemy(string enemyName) {
 		hp = 10;
 		normalDmg = 3;
 		name = "Rat";
+		level = 1;
+		killExp = 15;
 	}
 }
 void Enemy::dealDmg(int amount) {
@@ -15,6 +17,12 @@ void Enemy::dealDmg(int amount) {
 }
 int Enemy::getDmgAmount() {
 	return normalDmg;
+}
+int Enemy::getKillExp() {
+	return killExp;
+}
+int Enemy::getLevel() {
+	return level;
 }
 bool Enemy::isAlive() {
 	if(hp <= 0) {

@@ -1,19 +1,27 @@
 #include <iostream>
 #include "map.h"
 #include "stdlib.h"
+#include <termios.h>
 
 using namespace std;
 
 int main() {
+	struct termios old_tio, new_tio;
+	//unsigned char input;
 	Player me;
-	Map haupt;
+	Map haupt("stelarit.map");
+	haupt.checkCurrentTile(&me, me.posX, me.posY);
 	string input;
 	system("clear");
 	while(1) {
-		haupt.printMap(haupt.stelarit, &me);
+		system("clear");
+		cout << "===== MAP =====" << endl << endl;
+		haupt.printMap(&me);
 		cout << endl << "Level: " << me.getLevel() << " Exp: " << me.getExp() << endl;
 		cout << endl << "input> ";
-		cin >> input;
+		system("stty raw");
+		input = getchar();
+		system("stty cooked");
 		if(input == "w") {
 			haupt.moveNorth(&me);
 		}
@@ -26,6 +34,9 @@ int main() {
 		else if(input == "d") {
 			haupt.moveEast(&me);
 		}
-		system("clear");
+		else if(input == "q") {
+			system("clear");
+			return 0;
+		}
 	}
 }

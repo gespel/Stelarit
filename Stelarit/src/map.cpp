@@ -3,9 +3,24 @@
 
 using namespace std;
 
-void Map::printMap(string map[8][8], Player *p) {
-	for(int y = 7; y >= 0; y--) {
-		for(int x = 0; x < 8; x++) {
+Map::Map(string mapName) {
+	string line;
+	int lineNr = 0;
+	ifstream file(mapName);
+	if(file.is_open()) {
+		while(getline(file,line)) {
+			for(int i = 0; i < line.size(); i++) {
+				map[i][lineNr] = line[i];
+			}
+			lineNr++;
+		}
+	}
+
+}
+
+void Map::printMap(Player *p) {
+	for(int y = 0; y < 16; y++) {
+		for(int x = 0; x < 32; x++) {
 			if(x == p->posX && y == p->posY) {
 				cout << "p";
 			}
@@ -17,39 +32,40 @@ void Map::printMap(string map[8][8], Player *p) {
 	}
 	cout << currentPlayerTile << endl;
 }
-void Map::moveNorth(Player *p) {
-	if(((p->posY)+1) < 8) {
+void Map::moveSouth(Player *p) {
+	if(checkCurrentTile(p, p->posX, p->posY + 1) == true) {
 		p->posY += 1;
-		checkCurrentTile(p);
 	}
 }
-void Map::moveSouth(Player *p) {
-	if(((p->posY)-1) >= 0) {
+void Map::moveNorth(Player *p) {
+	if(checkCurrentTile(p, p->posX, p->posY - 1) == true) {
 		p->posY -= 1;
-		checkCurrentTile(p);	
 	}
 }
 void Map::moveEast(Player *p) {
-	if(((p->posX)+1) < 8) {
+	if(checkCurrentTile(p, p->posX + 1, p->posY) == true) {
 		p->posX += 1;
-		checkCurrentTile(p);
 	}
 }
 void Map::moveWest(Player *p) {
-	if(((p->posX)-1) >= 0) {
+	if(checkCurrentTile(p, p->posX - 1, p->posY) == true) {
 		p->posX -= 1;
-		checkCurrentTile(p);
 	}
 }
-void Map::checkCurrentTile(Player *p) {
-	if(stelarit[p->posX][p->posY] == "-") {
+bool Map::checkCurrentTile(Player *p, int pX, int pY) {
+	if(pY > 15 || pY < 0 || pX > 31 || pX < 0) {
+		return false;
+	}
+	
+	if(map[pX][pY] == "-") {
 		currentPlayerTile = "Grass";
 	}
-	else if(stelarit[p->posX][p->posY] == "|") {
+	else if(map[pX][pY] == "|") {
 		currentPlayerTile = "Forrest";
 		Fight a("forrestMove", p);
 	}
-	else if(stelarit[p->posX][p->posY] == "~") {
+	else if(map[pX][pY] == "~") {
 		currentPlayerTile = "Water";
 	}
+	return true;
 }
