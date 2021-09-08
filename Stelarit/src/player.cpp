@@ -81,6 +81,40 @@ void Player::updateLevel() {
 	if(exp >= level*100) {
 		exp -= level*100;
 		level++;
+		maxHp = 10 + (level-1)*5;
+		hp = 10 + (level-1)*5;
+		system("clear");
+		cout << "=================" << endl;
+		cout << "=== LEVEL UP! ===" << endl;
+		cout << "=================" << endl;
+		cout << "Choose the skill you want to improve by 1 point!" << endl;
+		cout << "Strength => [s]" << endl << "Intelligence => [i]" << endl << "Speech => [p]" << endl << "Memory => [m]" << endl;
+		cout << endl << "input> ";
+		bool leveled = false;
+		while(leveled == false) {
+			string input;
+			cin >> input;
+			if(input == "s") {
+				strength++;
+				leveled = true;
+			}
+			else if(input == "i") {
+				intelligence++;
+				leveled = true;
+			}
+			else if(input == "p") {
+				speech++;
+				leveled = true;
+			}
+			else if(input == "m") {
+				memory++;
+				leveled = true;
+			}
+			else {
+				cout << "This is not a skill!" << endl;
+			}
+		}
+
 		updateLevel();
 	}
 	
@@ -104,4 +138,10 @@ void Player::showCharacterMenu() {
 	getchar();
 	system("stty cooked");
 
+}
+int Player::getNormalDmg() {
+	return 3 + ((strength * strength)/10);
+}
+int Player::getSpellDmg() {
+	return ((intelligence * intelligence * intelligence)/100);
 }

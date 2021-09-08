@@ -30,7 +30,7 @@ void Map::printMap(Player *p) {
 		}
 		cout << endl;
 	}
-	cout << currentPlayerTile << endl;
+	cout << endl << "Current tile: " << currentPlayerTile << endl;
 }
 void Map::moveSouth(Player *p) {
 	if(checkCurrentTile(p, p->posX, p->posY + 1) == true) {
@@ -62,7 +62,11 @@ bool Map::checkCurrentTile(Player *p, int pX, int pY) {
 	}
 	else if(map[pX][pY] == "|") {
 		currentPlayerTile = "Forrest";
-		Fight a("forrestMove", p);
+		srand(time(NULL));
+		int decider = rand() % 10 + 1;
+		if(decider <= 4) {
+			Fight a("forrestMove", p);
+		}
 	}
 	else if(map[pX][pY] == "~") {
 		currentPlayerTile = "Water";

@@ -5,6 +5,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "curses.h"
+#include <time.h>
 
 class Fight {
 	public:

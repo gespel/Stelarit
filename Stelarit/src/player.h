@@ -29,6 +29,8 @@ class Player {
 		void showCharacterMenu();
 		int posX;
 		int posY;
+		int getNormalDmg();
+		int getSpellDmg();
 	private:
 		string playerName;
 		int level;

@@ -4,8 +4,21 @@
 Fight::Fight(string event, Player *p) {
 	system("clear");
 	if(event == "forrestMove") {
-		Enemy e("Rat");
-		fightingLoop(p, &e);
+		srand(time(NULL));
+		int decider = rand() % 3 + 1;
+		
+		if(decider == 1) {
+			Enemy a("Rat");
+			fightingLoop(p, &a);
+		}
+		else if(decider == 2) {
+			Enemy b("Troll");
+			fightingLoop(p, &b);
+		}
+		else {
+			Enemy c("Wolf");
+			fightingLoop(p, &c);
+		}
 	}
 }
 
@@ -22,10 +35,17 @@ void Fight::fightingLoop(Player *p, Enemy *e) {
 		cin >> input;
 		system("clear");
 		if(input == "a") {
-			int dmg = p->getStrength();
+			int dmg = p->getNormalDmg();
 			e->dealDmg(dmg);
 			cout << "=======================" << endl;
 			cout << "You dealt " << dmg << " damage!" << endl;
+		}
+		else if(input == "s") {
+			int dmg = p->getSpellDmg();
+			e->dealDmg(dmg);
+			cout << "=======================" << endl;
+			cout << "You casted a spell and did " << dmg << " damage!" << endl;
+			
 		}
 		if(e->getHealth() <= 0) {
 			system("clear");
