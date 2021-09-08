@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string.h>
+#include "console.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ class Player {
 		void setMoney(int amount);
 		void doDmg(int amount);
 		void drainStamina(int amount);
+		void showCharacterMenu();
 		int posX;
 		int posY;
 	private:

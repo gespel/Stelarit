@@ -6,18 +6,18 @@
 using namespace std;
 
 int main() {
-	struct termios old_tio, new_tio;
-	//unsigned char input;
 	Player me;
 	Map haupt("stelarit.map");
 	haupt.checkCurrentTile(&me, me.posX, me.posY);
 	string input;
+	string nameIn;
 	system("clear");
+	cout << "Enter the character name: ";
+	cin >> nameIn;
+	me.setPlayerName(nameIn);
 	while(1) {
-		system("clear");
 		cout << "===== MAP =====" << endl << endl;
 		haupt.printMap(&me);
-		cout << endl << "Level: " << me.getLevel() << " Exp: " << me.getExp() << endl;
 		cout << endl << "input> ";
 		system("stty raw");
 		input = getchar();
@@ -38,5 +38,12 @@ int main() {
 			system("clear");
 			return 0;
 		}
+		else if(input == "c") {
+			me.showCharacterMenu();
+		}
+		else {
+			cout << "Not a valid key!" << endl;
+		}
+		system("clear");
 	}
 }

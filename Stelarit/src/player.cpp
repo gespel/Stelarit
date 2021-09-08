@@ -84,4 +84,24 @@ void Player::updateLevel() {
 		updateLevel();
 	}
 	
-}	
+}
+void Player::showCharacterMenu() {
+	system("clear");
+	cout << "===== Character =====" << endl;
+	cout << "\tName:\t\t" << playerName << endl;
+	cout << "\tLevel:\t\t" << level << endl;
+	cout << "\tExperience:\t" << exp << endl;
+	cout << "\tHealth:\t\t" << hp << " / " << maxHp << endl;
+	cout << "\tMoney:\t\t" << money << endl;
+	cout << "=== Skills ===" << endl;
+	cout << "\tStrength:\t" << strength << endl;
+	cout << "\tIntelligence:\t" << intelligence << endl;
+	cout << "\tSpeech:\t\t" << speech << endl;
+	cout << "\tMemory:\t\t" << memory << endl;
+	
+	cout << endl << "=== Press a key to leave the menu ===" << endl;
+	system("stty raw");
+	getchar();
+	system("stty cooked");
+
+}

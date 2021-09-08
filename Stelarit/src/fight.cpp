@@ -1,4 +1,5 @@
 #include "fight.h"
+#include "console.h"
 
 Fight::Fight(string event, Player *p) {
 	system("clear");
@@ -11,7 +12,7 @@ Fight::Fight(string event, Player *p) {
 void Fight::fightingLoop(Player *p, Enemy *e) {
 	bool fight = true;
 	string input;
-	cout << "=== A fight against " << e->getName() << " started! ===" << endl; 
+	cout << "===================" << endl << "A fight against " << e->getName() << " started!" << endl << "===================" << endl << endl; 
 	while(fight == true) {
 		cout << "===== FIGHT =====" << endl;
 		cout << "Your Health: " << p->getHealth() << " Your Level: " << p->getLevel() << endl;
@@ -23,18 +24,22 @@ void Fight::fightingLoop(Player *p, Enemy *e) {
 		if(input == "a") {
 			int dmg = p->getStrength();
 			e->dealDmg(dmg);
-			cout << endl << "= You dealt " << dmg << " damage! =" << endl;
+			cout << "=======================" << endl;
+			cout << "You dealt " << dmg << " damage!" << endl;
 		}
 		if(e->getHealth() <= 0) {
+			system("clear");
 			cout << "YOU WON! YOU EARNED " << e->getKillExp() << " EXP." << endl;
 			p->addExp(e->getKillExp());
 			p->restoreHealth();
 			fight = false;
+			Console::pause();
 		}
 		else {
 			int dmg = e->getDmgAmount();
-			cout << "= " << e->getName() << " attacks with " << e->getDmgAmount() << " =" << endl << endl;
+			cout << "" << e->getName() << " attacks with " << e->getDmgAmount() << " damage!" << endl;
 			p->doDmg(dmg);
+			cout << "=======================" << endl << endl;
 		}
-	}	
+	}
 }
